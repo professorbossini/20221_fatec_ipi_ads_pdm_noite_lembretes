@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Button, 
   StyleSheet, 
@@ -7,6 +8,11 @@ import {
 } from 'react-native';
 
 export default function App() {
+  const [lembrete, setLembrete] = useState('') 
+  
+  const capturarLembrete = (lembreteDigitado) => {
+    setLembrete(lembreteDigitado)
+  }
   return (
     <View
       style={styles.telaPrincipalView}>
@@ -15,10 +21,13 @@ export default function App() {
         <TextInput 
           placeholder='Lembrar...'
           style={styles.lembreteTextInput}
+          onChangeText={capturarLembrete}
         />
-        <Button 
+        <Button
+          disabled={lembrete.length === 0}
           title="Adicionar lembrete"
         />
+        <Text>{lembrete}</Text>
       </View>
       <View>
         {/* aqui será exibida a lista de lembretes */}
