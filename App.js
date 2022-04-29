@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  Button, 
+  StyleSheet, 
+  Text,
+  TextInput, 
+  View 
+} from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View
+      style={styles.telaPrincipalView}>
+      <View>
+        {/* usuário vai inserir lembretes aqui */}
+        <TextInput 
+          placeholder='Lembrar...'
+          style={styles.lembreteTextInput}
+        />
+        <Button 
+          title="Adicionar lembrete"
+        />
+      </View>
+      <View>
+        {/* aqui será exibida a lista de lembretes */}
+
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  telaPrincipalView: {
+    padding: 40
   },
+  lembreteTextInput: {
+    borderBottomColor: 'black', 
+    borderBottomWidth: 1, 
+    marginBottom: 4, 
+    padding: 12
+  }
 });
