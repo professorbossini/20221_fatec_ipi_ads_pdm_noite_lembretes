@@ -60,7 +60,8 @@ export default function App() {
 
 const styles = StyleSheet.create({
   telaPrincipalView: {
-    padding: 40
+    padding: 40,
+    marginBottom: 80
   },
   lembreteTextInput: {
     borderBottomColor: 'black', 
