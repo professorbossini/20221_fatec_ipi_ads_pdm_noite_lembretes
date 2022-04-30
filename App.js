@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {
-  Button, 
+  Button,
+  ScrollView, 
   StyleSheet, 
   Text,
   TextInput, 
@@ -40,16 +41,22 @@ export default function App() {
           onPress={adicionarLembrete}
         />
       </View>
-      <View>
+      <ScrollView>
         {/* aqui será exibida a lista de lembretes */}
         {/* Fazer café => <Text>Fazer café</Text> */}
         {/* Ver um filme => <Text>Ver um filme</Text> */}
         {/* <Text>Fazer café</Text> */}
         {/* <Text>Ver um filme</Text> */}
         {
-          lembretes.map(l => <Text>{l}</Text>)
+          lembretes.map(l => (
+            <View 
+              key={l}
+              style={styles.itemNaLista}>
+               <Text>{l}</Text>
+            </View>
+          ))
         }
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -63,5 +70,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1, 
     marginBottom: 4, 
     padding: 12
+  },
+  itemNaLista: {
+    padding: 12,
+    backgroundColor: '#CCC',
+    borderColor: '#000',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginTop: 8
   }
 });
