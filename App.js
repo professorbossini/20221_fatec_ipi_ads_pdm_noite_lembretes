@@ -8,10 +8,20 @@ import {
 } from 'react-native';
 
 export default function App() {
-  const [lembrete, setLembrete] = useState('') 
+  const [lembrete, setLembrete] = useState('')
+  const[lembretes, setLembretes] = useState([])
   
   const capturarLembrete = (lembreteDigitado) => {
     setLembrete(lembreteDigitado)
+  }
+
+  const adicionarLembrete = () => {
+    setLembretes(lembretes => {
+      //operador spread
+      let aux = [lembrete, ...lembretes]
+      setLembrete('')
+      return aux
+    })
   }
   return (
     <View
@@ -22,16 +32,23 @@ export default function App() {
           placeholder='Lembrar...'
           style={styles.lembreteTextInput}
           onChangeText={capturarLembrete}
+          value={lembrete}
         />
         <Button
           disabled={lembrete.length === 0}
           title="Adicionar lembrete"
+          onPress={adicionarLembrete}
         />
-        <Text>{lembrete}</Text>
       </View>
       <View>
         {/* aqui será exibida a lista de lembretes */}
-
+        {/* Fazer café => <Text>Fazer café</Text> */}
+        {/* Ver um filme => <Text>Ver um filme</Text> */}
+        {/* <Text>Fazer café</Text> */}
+        {/* <Text>Ver um filme</Text> */}
+        {
+          lembretes.map(l => <Text>{l}</Text>)
+        }
       </View>
     </View>
   );
