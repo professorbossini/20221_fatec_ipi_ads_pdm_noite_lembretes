@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {
   Button,
+  FlatList,
   ScrollView, 
   StyleSheet, 
   Text,
@@ -11,6 +12,7 @@ import {
 export default function App() {
   const [lembrete, setLembrete] = useState('')
   const[lembretes, setLembretes] = useState([])
+  const[contador, setContador] = useState(0)
   
   const capturarLembrete = (lembreteDigitado) => {
     setLembrete(lembreteDigitado)
@@ -18,8 +20,9 @@ export default function App() {
 
   const adicionarLembrete = () => {
     setLembretes(lembretes => {
+      setContador(contador + 1)
       //operador spread
-      let aux = [lembrete, ...lembretes]
+      let aux = [{key: contador.toString(), value: lembrete}, ...lembretes]
       setLembrete('')
       return aux
     })
@@ -41,22 +44,16 @@ export default function App() {
           onPress={adicionarLembrete}
         />
       </View>
-      <ScrollView>
-        {/* aqui será exibida a lista de lembretes */}
-        {/* Fazer café => <Text>Fazer café</Text> */}
-        {/* Ver um filme => <Text>Ver um filme</Text> */}
-        {/* <Text>Fazer café</Text> */}
-        {/* <Text>Ver um filme</Text> */}
-        {
-          lembretes.map(l => (
-            <View 
-              key={l}
-              style={styles.itemNaLista}>
-               <Text>{l}</Text>
-            </View>
-          ))
-        }
-      </ScrollView>
+      <FlatList 
+        data={lembretes}
+        renderItem={l => (
+          <View
+            style={styles.itemNaLista}>
+            <Text>{l.item.value}</Text>
+          </View>
+        )}
+      />
+
     </View>
   );
 }
@@ -80,3 +77,20 @@ const styles = StyleSheet.create({
     marginTop: 8
   }
 });
+
+    // <ScrollView>
+    //   {/* aqui será exibida a lista de lembretes */}
+    //   {/* Fazer café => <Text>Fazer café</Text> */}
+    //   {/* Ver um filme => <Text>Ver um filme</Text> */}
+    //   {/* <Text>Fazer café</Text> */}
+    //   {/* <Text>Ver um filme</Text> */}
+    //   {
+    //     lembretes.map(l => (
+    //       <View 
+    //         key={l}
+    //         style={styles.itemNaLista}>
+    //          <Text>{l}</Text>
+    //       </View>
+    //     ))
+    //   }
+    // </ScrollView>
